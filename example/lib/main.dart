@@ -58,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
               MaterialPageRoute(
                 builder: (_) => FacebookImagePicker(
                       _accessToken,
+                      max: 2,
                       onDone: (items) {
                         Navigator.pop(context);
                         setState(() {

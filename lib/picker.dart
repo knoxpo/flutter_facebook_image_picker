@@ -25,6 +25,10 @@ class FacebookImagePicker extends StatefulWidget {
   final String cancelBtnText;
   final TextStyle cancelBtnTextStyle;
   final Function onCancel;
+  final int min;
+  final int max;
+  final Widget maxMessage;
+  final Widget minMessage;
 
   FacebookImagePicker(
     this._accessToken, {
@@ -37,6 +41,10 @@ class FacebookImagePicker extends StatefulWidget {
     this.cancelBtnText = 'Cancel',
     this.cancelBtnTextStyle,
     @required this.onCancel,
+    this.min = 1,
+    @required this.max,
+    this.maxMessage,
+    this.minMessage,
   }) : assert(_accessToken != null);
 
   @override
@@ -52,6 +60,7 @@ class _FacebookImagePickerState extends State<FacebookImagePicker>
   List<Photo> _photos = [];
   String _photosNextLink;
   List<Photo> _selectedPhotos;
+  GlobalKey<ScaffoldState> _globalKey;
 
   AnimationController _controller;
   Animation<Offset> _imageListPosition;
@@ -60,6 +69,7 @@ class _FacebookImagePickerState extends State<FacebookImagePicker>
   void initState() {
     super.initState();
     _selectedPhotos = List<Photo>();
+    _globalKey = GlobalKey<ScaffoldState>();
     _client = GraphApi(widget._accessToken);
     _fetchAlbums();
 
@@ -138,8 +148,15 @@ class _FacebookImagePickerState extends State<FacebookImagePicker>
   }
 
   void _onDone() {
-    widget.onDone(_selectedPhotos);
-    _reset();
+    if (_selectedPhotos.length <= widget.min) {
+      _displaySnackBar(
+        Text(
+            'you have to select at least ${widget.min} ${widget.min <= 1 ? 'Photo' : 'Photos'}'),
+      );
+    } else {
+      widget.onDone(_selectedPhotos);
+      _reset();
+    }
   }
 
   Widget _buildDoneButton() {
@@ -189,21 +206,38 @@ class _FacebookImagePickerState extends State<FacebookImagePicker>
 
   void _onPhotoTap(Photo photo) {
     int itemIndex = _selectedPhotos.indexOf(photo);
-
     if (itemIndex == -1) {
-      return setState(() {
-        _selectedPhotos.add(photo);
+      if (_selectedPhotos.length < widget.max) {
+        setState(() {
+          _selectedPhotos.add(photo);
+        });
+      } else {
+        _displaySnackBar(
+          Text(
+              'Allow to select only ${widget.max} ${widget.max <= 1 ? 'Photo' : 'Photos'}'),
+        );
+      }
+    } else {
+      setState(() {
+        _selectedPhotos.removeAt(itemIndex);
       });
     }
+  }
 
-    setState(() {
-      _selectedPhotos.removeAt(itemIndex);
-    });
+  void _displaySnackBar(Widget content) {
+    _globalKey.currentState.showSnackBar(SnackBar(
+      content: content,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(6), topRight: Radius.circular(6))),
+      duration: Duration(milliseconds: 700),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _globalKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: widget.appBarColor,

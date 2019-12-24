@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Facebook Gallery Picker.</string>
-    <string name="facebook_app_id">219488965589880</string>
-    <string name="fb_login_protocol_scheme">fb219488965589880</string>
+    <string name="app_name">Shy - Go Social</string>
+
+    <!-- Replace "000000000000" with your Facebook App ID here. -->
+    <string name="facebook_app_id">537823976749658</string>
+
+    <!--
+      Replace "000000000000" with your Facebook App ID here.
+      **NOTE**: The scheme needs to start with `fb` and then your ID.
+    -->
+    <string name="fb_login_protocol_scheme">fb537823976749658</string>
 </resources>
