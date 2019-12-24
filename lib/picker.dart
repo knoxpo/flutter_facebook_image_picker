@@ -148,7 +148,7 @@ class _FacebookImagePickerState extends State<FacebookImagePicker>
   }
 
   void _onDone() {
-    if (_selectedPhotos.length <= widget.min) {
+    if (_selectedPhotos.length < widget.min) {
       _displaySnackBar(
         Text(
             'you have to select at least ${widget.min} ${widget.min <= 1 ? 'Photo' : 'Photos'}'),
