@@ -123,7 +123,7 @@ class AlbumGridState extends State<AlbumGrid> {
       children: List.generate(widget._albums.length, (index) {
         return Padding(
           padding: EdgeInsets.all(8.00),
-          child: _buildAlbumCell(widget._albums[index]),
+          child: widget._albums[index].coverPhoto != null ? _buildAlbumCell(widget._albums[index]) : Container(),
         );
       }),
     );
