@@ -15,5 +15,5 @@ class Album {
       : id = json['id'],
         count = json['count'],
         name = json['name'],
-        coverPhoto = json['cover_photo']['source'];
+        coverPhoto = json['cover_photo']!= null ? json['cover_photo']['source'] : null;
 }
