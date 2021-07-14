@@ -9,8 +9,8 @@ class AlbumGrid extends StatefulWidget {
 
   AlbumGrid(
     this._albums, {
-    @required this.onAlbumSelected,
-    @required this.onLoadMore,
+    required this.onAlbumSelected,
+    required this.onLoadMore,
   });
 
   @override
@@ -20,8 +20,8 @@ class AlbumGrid extends StatefulWidget {
 }
 
 class AlbumGridState extends State<AlbumGrid> {
-  ScrollController _controller;
-  Debouncer _debouncer;
+  ScrollController? _controller;
+  late Debouncer _debouncer;
 
   @override
   void initState() {
@@ -34,9 +34,9 @@ class AlbumGridState extends State<AlbumGrid> {
     );
 
     _controller = ScrollController();
-    _controller.addListener(() {
-      double maxScroll = _controller.position.maxScrollExtent;
-      double currentScroll = _controller.position.pixels;
+    _controller!.addListener(() {
+      double maxScroll = _controller!.position.maxScrollExtent;
+      double currentScroll = _controller!.position.pixels;
       double delta = 100.0;
       if (maxScroll - currentScroll <= delta) {
         _debouncer.debounce();
@@ -47,7 +47,7 @@ class AlbumGridState extends State<AlbumGrid> {
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    _controller!.dispose();
   }
 
   Widget _buildAlbumCell(Album album) {
@@ -62,7 +62,7 @@ class AlbumGridState extends State<AlbumGrid> {
             child: ClipRRect(
               borderRadius: new BorderRadius.circular(8.0),
               child: FadeInImage(
-                image: NetworkImage(album.coverPhoto),
+                image: NetworkImage(album.coverPhoto!),
                 placeholder: AssetImage(
                   'assets/loading.gif',
                   package: 'flutter_facebook_image_picker',
@@ -99,7 +99,7 @@ class AlbumGridState extends State<AlbumGrid> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Text(
-              album.name,
+              album.name!,
               textAlign: TextAlign.center,
             ),
           ),

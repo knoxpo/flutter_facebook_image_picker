@@ -1,19 +1,19 @@
 /// Represent a Facebook Photo Object
 class Photo {
   /// The Facebook ID of the photo
-  final String id;
+  final String? id;
 
   /// The width of the photo in pixels
-  final int width;
+  final int? width;
 
   // The height of the photo in pixels
-  final int height;
+  final int? height;
 
   // The name of the photo
-  final String name;
+  final String? name;
 
   // The source of the photo
-  final String source;
+  final String? source;
 
   Photo(
     this.id,

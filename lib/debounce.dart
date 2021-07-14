@@ -3,7 +3,7 @@ import 'dart:async';
 class Debouncer {
   Duration delay;
   var callback;
-  List args;
+  List? args;
   bool atBegin;
 
   Debouncer(this.delay, this.callback, this.args, [this.atBegin = false]);
