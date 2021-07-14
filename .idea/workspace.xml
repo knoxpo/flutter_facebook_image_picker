@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7cb3f522-6090-49ca-86b3-ce34a22c9b23" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_3_API_28_pie_Version_]" />
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1vIJbeZhZOfId9b4CC5z8C5GZmv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.project.structure.last.selected" value="SDK Location" />
+    <property name="android.project.structure.proportion" value="0.15" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/example/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7cb3f522-6090-49ca-86b3-ce34a22c9b23" name="Default Changelist" comment="" />
+      <created>1626243741883</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1626243741883</updated>
+    </task>
+    <task id="LOCAL-00001" summary="null safety">
+      <created>1626247301657</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1626247301657</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="null safety" />
+    <option name="LAST_COMMIT_MESSAGE" value="null safety" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="486" y="97" key="CommitChangelistDialog2" timestamp="1626247301304">
+      <screen x="0" y="23" width="1920" height="999" />
+    </state>
+    <state x="486" y="97" key="CommitChangelistDialog2/0.23.1920.999@0.23.1920.999" timestamp="1626247301304" />
+    <state width="1878" height="330" key="GridCell.Tab.0.bottom" timestamp="1626247426064">
+      <screen x="0" y="23" width="1920" height="999" />
+    </state>
+    <state width="1878" height="330" key="GridCell.Tab.0.bottom/0.23.1920.999@0.23.1920.999" timestamp="1626247426064" />
+    <state width="1878" height="330" key="GridCell.Tab.0.center" timestamp="1626247426064">
+      <screen x="0" y="23" width="1920" height="999" />
+    </state>
+    <state width="1878" height="330" key="GridCell.Tab.0.center/0.23.1920.999@0.23.1920.999" timestamp="1626247426064" />
+    <state width="1878" height="330" key="GridCell.Tab.0.left" timestamp="1626247426063">
+      <screen x="0" y="23" width="1920" height="999" />
+    </state>
+    <state width="1878" height="330" key="GridCell.Tab.0.left/0.23.1920.999@0.23.1920.999" timestamp="1626247426063" />
+    <state width="1878" height="330" key="GridCell.Tab.0.right" timestamp="1626247426064">
+      <screen x="0" y="23" width="1920" height="999" />
+    </state>
+    <state width="1878" height="330" key="GridCell.Tab.0.right/0.23.1920.999@0.23.1920.999" timestamp="1626247426064" />
+    <state x="560" y="262" key="Vcs.Push.Dialog.v2" timestamp="1626247309698">
+      <screen x="0" y="23" width="1920" height="999" />
+    </state>
+    <state x="560" y="262" key="Vcs.Push.Dialog.v2/0.23.1920.999@0.23.1920.999" timestamp="1626247309698" />
+    <state x="661" y="277" width="598" height="490" key="find.popup" timestamp="1626244850874">
+      <screen x="0" y="23" width="1920" height="999" />
+    </state>
+    <state x="661" y="277" width="598" height="490" key="find.popup/0.23.1920.999@0.23.1920.999" timestamp="1626244850874" />
+    <state x="637" y="242" key="git4idea.branch.GitSmartOperationDialog" timestamp="1626247265383">
+      <screen x="0" y="23" width="1920" height="999" />
+    </state>
+    <state x="637" y="242" key="git4idea.branch.GitSmartOperationDialog/0.23.1920.999@0.23.1920.999" timestamp="1626247265383" />
+  </component>
+</project>

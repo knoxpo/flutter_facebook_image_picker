@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
+    <mapping directory="$USER_HOME$/development/flutter" vcs="Git" />
+    <mapping directory="$USER_HOME$/development/flutter-1.22.2" vcs="Git" />
+    <mapping directory="$USER_HOME$/development/flutter-2.0.6" vcs="Git" />
+    <mapping directory="$USER_HOME$/development/flutter-2.0.6/.pub-cache/git/emoji_picker-e51ffca492de3e43a09e7450638e29f4ee63fec5" vcs="Git" />
+    <mapping directory="$USER_HOME$/development/flutter/.pub-cache/git/flutter_facebook_image_picker-63b709bb5ce0742836140320e04dbc23f8d32bdd" vcs="Git" />
+    <mapping directory="$USER_HOME$/development/flutter/.pub-cache/git/flutterlocation-b34a33c88fc3e470ca622a34f001a6d9228b31b0" vcs="Git" />
+    <mapping directory="$USER_HOME$/development/new" vcs="Git" />
+    <mapping directory="$USER_HOME$/development/new/.pub-cache/git/emoji_picker-e51ffca492de3e43a09e7450638e29f4ee63fec5" vcs="Git" />
+  </component>
+</project>
