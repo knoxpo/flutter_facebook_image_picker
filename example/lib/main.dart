@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_image_picker/model/photo.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_facebook_image_picker/flutter_facebook_image_picker.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 
 void main() => runApp(new MyApp());
 
@@ -29,7 +29,7 @@ class MyAppState extends State<MyApp> {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({required this.title});
 
   final String title;
 
@@ -38,49 +38,56 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static final FacebookLogin facebookSignIn = new FacebookLogin();
+  static final FacebookLogin facebookSignIn = FacebookLogin();
   List<Photo> _photos = [];
-  String _accessToken;
-  String _error;
+  String? _accessToken;
+  String? _error;
 
   Future<Null> _login() async {
     final FacebookLoginResult result =
-        await facebookSignIn.logInWithReadPermissions(['user_photos']);
+        await facebookSignIn.logIn(permissions: [ FacebookPermission.publicProfile, FacebookPermission.email,]);
 
     switch (result.status) {
-      case FacebookLoginStatus.loggedIn:
-        final FacebookAccessToken accessToken = result.accessToken;
-        setState(() {
-          _accessToken = accessToken.token;
-        });
+      
+      case FacebookLoginStatus.success:
+  
+        final FacebookAccessToken? accessToken = result.accessToken;
+        
+        if(accessToken != null){
+          setState(() {
+            _accessToken = accessToken.token;
+          });
 
-        Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => FacebookImagePicker(
-                      _accessToken,
-                      max: 2,
-                      onDone: (items) {
-                        Navigator.pop(context);
-                        setState(() {
-                          _error = null;
-                          _photos = items;
-                        });
-                      },
-                      onCancel: () => Navigator.pop(context),
-                    ),
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => FacebookImagePicker(
+                _accessToken!,
+                onDone: (items) {
+                  Navigator.pop(context);
+                  if(items != null && items.isNotEmpty){
+                    setState(() {
+                      _error = null;
+                      _photos = items;
+                    });
+                  }
+                },
+                onCancel: () => Navigator.pop(context),
               ),
-            );
+            ),
+          );
+        }
         break;
-      case FacebookLoginStatus.cancelledByUser:
+        
+      case FacebookLoginStatus.cancel:
         setState(() {
           _error = 'Login cancelled by the user.';
         });
-
         break;
+        
       case FacebookLoginStatus.error:
         setState(() {
           _error = 'Something went wrong with the login process.\n'
-              'Here\'s the error Facebook gave us: ${result.errorMessage}';
+              'Here\'s the error Facebook gave us: ${result.error}';
         });
         break;
     }
@@ -98,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: new Center(
+            child: Center(
               // Center is a layout widget. It takes a single child and positions it
               // in the middle of the parent.
               child: MaterialButton(
@@ -113,16 +120,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          _error != null ? Text(_error) : null,
+          _error != null ? Text(_error!) : Container(),
           Expanded(
             child: GridView.count(
               crossAxisCount: 3,
               children: List.generate(_photos.length, (index) {
-                return Image.network(_photos[index].source);
+                return Image.network(_photos[index].source!);
               }),
             ),
           ),
-        ].where((o) => o != null).toList(),
+        ],
       ),
     );
   }

@@ -1,6 +1,6 @@
 class Cursors {
-  final String before;
-  final String after;
+  final String? before;
+  final String? after;
 
   Cursors(
     this.before,

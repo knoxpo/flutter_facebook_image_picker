@@ -15,20 +15,16 @@ class FacebookImagePicker extends StatefulWidget {
 
   /// AppBar config
   final String appBarTitle;
-  final TextStyle appBarTextStyle;
-  final Color appBarColor;
+  final TextStyle? appBarTextStyle;
+  final Color? appBarColor;
 
   // AppBar actions
   final String doneBtnText;
-  final TextStyle doneBtnTextStyle;
-  final Function(List<Photo>) onDone;
+  final TextStyle? doneBtnTextStyle;
+  final Function(List<Photo>?) onDone;
   final String cancelBtnText;
-  final TextStyle cancelBtnTextStyle;
+  final TextStyle? cancelBtnTextStyle;
   final Function onCancel;
-  final int min;
-  final int max;
-  final Widget maxMessage;
-  final Widget minMessage;
 
   FacebookImagePicker(
     this._accessToken, {
@@ -37,14 +33,10 @@ class FacebookImagePicker extends StatefulWidget {
     this.appBarColor,
     this.doneBtnText = 'Done',
     this.doneBtnTextStyle,
-    @required this.onDone,
+    required this.onDone,
     this.cancelBtnText = 'Cancel',
     this.cancelBtnTextStyle,
-    @required this.onCancel,
-    this.min = 1,
-    @required this.max,
-    this.maxMessage,
-    this.minMessage,
+    required this.onCancel,
   }) : assert(_accessToken != null);
 
   @override
@@ -53,23 +45,21 @@ class FacebookImagePicker extends StatefulWidget {
 
 class _FacebookImagePickerState extends State<FacebookImagePicker>
     with TickerProviderStateMixin {
-  GraphApi _client;
-  Album _selectedAlbum;
+  late GraphApi _client;
+  Album? _selectedAlbum;
   List<Album> _albums = [];
-  String _albumsNextLink;
+  String? _albumsNextLink;
   List<Photo> _photos = [];
-  String _photosNextLink;
-  List<Photo> _selectedPhotos;
-  GlobalKey<ScaffoldState> _globalKey;
+  String? _photosNextLink;
+  List<Photo>? _selectedPhotos;
 
-  AnimationController _controller;
-  Animation<Offset> _imageListPosition;
+  late AnimationController _controller;
+  late Animation<Offset> _imageListPosition;
 
   @override
   void initState() {
     super.initState();
-    _selectedPhotos = List<Photo>();
-    _globalKey = GlobalKey<ScaffoldState>();
+    _selectedPhotos = [];
     _client = GraphApi(widget._accessToken);
     _fetchAlbums();
 
@@ -93,8 +83,8 @@ class _FacebookImagePickerState extends State<FacebookImagePicker>
     super.dispose();
   }
 
-  String get title {
-    return _selectedAlbum == null ? widget.appBarTitle : _selectedAlbum.name;
+  String? get title {
+    return _selectedAlbum == null ? widget.appBarTitle : _selectedAlbum!.name;
   }
 
   Future<void> _fetchAlbums() async {
@@ -148,15 +138,8 @@ class _FacebookImagePickerState extends State<FacebookImagePicker>
   }
 
   void _onDone() {
-    if (_selectedPhotos.length < widget.min) {
-      _displaySnackBar(
-        Text(
-            'you have to select at least ${widget.min} ${widget.min <= 1 ? 'Photo' : 'Photos'}'),
-      );
-    } else {
-      widget.onDone(_selectedPhotos);
-      _reset();
-    }
+    widget.onDone(_selectedPhotos);
+    _reset();
   }
 
   Widget _buildDoneButton() {
@@ -166,7 +149,7 @@ class _FacebookImagePickerState extends State<FacebookImagePicker>
         child: Padding(
           padding: EdgeInsets.only(right: 5.00),
           child: Text(
-            '${widget.doneBtnText}(${_selectedPhotos.length})',
+            '${widget.doneBtnText}(${_selectedPhotos!.length})',
             textScaleFactor: 1.3,
             style: widget.doneBtnTextStyle ??
                 TextStyle(
@@ -205,44 +188,27 @@ class _FacebookImagePickerState extends State<FacebookImagePicker>
   }
 
   void _onPhotoTap(Photo photo) {
-    int itemIndex = _selectedPhotos.indexOf(photo);
+    int itemIndex = _selectedPhotos!.indexOf(photo);
+
     if (itemIndex == -1) {
-      if (_selectedPhotos.length < widget.max) {
-        setState(() {
-          _selectedPhotos.add(photo);
-        });
-      } else {
-        _displaySnackBar(
-          Text(
-              'Allow to select only ${widget.max} ${widget.max <= 1 ? 'Photo' : 'Photos'}'),
-        );
-      }
-    } else {
-      setState(() {
-        _selectedPhotos.removeAt(itemIndex);
+      return setState(() {
+        _selectedPhotos!.add(photo);
       });
     }
-  }
 
-  void _displaySnackBar(Widget content) {
-    _globalKey.currentState.showSnackBar(SnackBar(
-      content: content,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(6), topRight: Radius.circular(6))),
-      duration: Duration(milliseconds: 700),
-    ));
+    setState(() {
+      _selectedPhotos!.removeAt(itemIndex);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _globalKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: widget.appBarColor,
         title: Text(
-          title,
+          title!,
           style: widget.appBarTextStyle,
         ),
         leading: _selectedAlbum == null

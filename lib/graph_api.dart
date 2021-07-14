@@ -14,7 +14,7 @@ class GraphApi {
 
   GraphApi(this._accessToken);
 
-  Future<AlbumPaging> fetchAlbums([String nextUrl]) async {
+  Future<AlbumPaging> fetchAlbums([String? nextUrl]) async {
     String url = nextUrl ??
         '$_graphApiEndpoint/me/albums?fields=cover_photo{source},id,name,count&format=json';
     http.Response response = await http.get(Uri.parse(url),
@@ -28,9 +28,9 @@ class GraphApi {
     return AlbumPaging.fromJson(body);
   }
 
-  Future<PhotoPaging> fetchPhotos(Album album, [String nextUrl]) async {
+  Future<PhotoPaging> fetchPhotos(Album? album, [String? nextUrl]) async {
     String url = nextUrl ??
-        '$_graphApiEndpoint/${album.id}/photos?fields=id,name,width,height,photo,source&format=json';
+        '$_graphApiEndpoint/${album!.id}/photos?fields=id,name,width,height,photo,source&format=json';
     http.Response response = await http.get(Uri.parse(url), headers: {
       'Authorization': 'Bearer $_accessToken',
     });

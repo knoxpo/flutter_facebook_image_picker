@@ -1,8 +1,8 @@
 class Album {
-  final String id;
-  final int count;
-  final String name;
-  final String coverPhoto;
+  final String? id;
+  final int? count;
+  final String? name;
+  final String? coverPhoto;
 
   Album(
     this.id,

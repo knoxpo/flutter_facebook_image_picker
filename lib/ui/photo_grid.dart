@@ -4,15 +4,15 @@ import 'package:flutter_facebook_image_picker/model/photo.dart';
 
 class PhotoGrid extends StatefulWidget {
   final List<Photo> _photos;
-  final List<Photo> _selectedPhotos;
+  final List<Photo>? _selectedPhotos;
   final Function(Photo) onPhotoTap;
   final Function onLoadMore;
 
   PhotoGrid(
     this._photos,
     this._selectedPhotos, {
-    @required this.onPhotoTap,
-    @required this.onLoadMore,
+    required this.onPhotoTap,
+    required this.onLoadMore,
   });
 
   @override
@@ -22,8 +22,8 @@ class PhotoGrid extends StatefulWidget {
 }
 
 class PhotoGridState extends State<PhotoGrid> {
-  ScrollController _controller;
-  Debouncer _debouncer;
+  ScrollController? _controller;
+  late Debouncer _debouncer;
 
   @override
   void initState() {
@@ -36,9 +36,9 @@ class PhotoGridState extends State<PhotoGrid> {
     );
 
     _controller = ScrollController();
-    _controller.addListener(() {
-      double maxScroll = _controller.position.maxScrollExtent;
-      double currentScroll = _controller.position.pixels;
+    _controller!.addListener(() {
+      double maxScroll = _controller!.position.maxScrollExtent;
+      double currentScroll = _controller!.position.pixels;
       double delta = 100.0;
       if (maxScroll - currentScroll <= delta) {
         _debouncer.debounce();
@@ -49,11 +49,11 @@ class PhotoGridState extends State<PhotoGrid> {
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    _controller!.dispose();
   }
 
   bool _isSelected(Photo photo) {
-    return widget._selectedPhotos.indexOf(photo) != -1;
+    return widget._selectedPhotos!.indexOf(photo) != -1;
   }
 
   Widget _buildPhotoCell(Photo photo) {
@@ -63,7 +63,7 @@ class PhotoGridState extends State<PhotoGrid> {
         children: [
           Positioned.fill(
             child: FadeInImage(
-              image: NetworkImage(photo.source),
+              image: NetworkImage(photo.source!),
               placeholder: AssetImage(
                 'assets/loading.gif',
                 package: 'flutter_facebook_image_picker',
@@ -81,7 +81,7 @@ class PhotoGridState extends State<PhotoGrid> {
                   ),
                 )
               : null,
-        ].where((o) => o != null).toList(),
+        ].where((o) => o != null).toList() as List<Widget>,
       ),
     );
   }
