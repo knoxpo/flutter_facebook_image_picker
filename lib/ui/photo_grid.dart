@@ -80,8 +80,8 @@ class PhotoGridState extends State<PhotoGrid> {
                     color: Colors.green,
                   ),
                 )
-              : null,
-        ].where((o) => o != null).toList() as List<Widget>,
+              : Container(),
+        ],
       ),
     );
   }
